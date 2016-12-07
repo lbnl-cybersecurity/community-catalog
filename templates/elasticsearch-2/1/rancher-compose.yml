@@ -15,13 +15,12 @@
       type: "int"
       default: 80
       required: true
-    questions:
-      - variable: "es_warm_datanode_scale"
-        description: "Number of es warm datanodes"
-        label: "ElasticSearch Warm DataNodes"
-        required: true
-        default: 0
-        type: "int"
+    - variable: "es_warm_datanode_scale"
+      description: "Number of es warm datanodes"
+      label: "ElasticSearch Warm DataNodes"
+      required: true
+      default: 0
+      type: "int"
 
 elasticsearch-masters:
   metadata:
