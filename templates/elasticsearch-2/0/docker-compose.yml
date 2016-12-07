@@ -11,8 +11,8 @@ elasticsearch-datavolume-masters:
     io.rancher.container.hostname_override: container_name
     io.rancher.container.start_once: true
   volumes:
-    - /usr/share/elasticsearch/data
-    - /usr/share/elasticsearch/config
+    - /usr/share/elasticsearch/data:/data/elasticsearch2/master/data
+    - /usr/share/elasticsearch/config:/data/elasticsearch2/master/config
     - /opt/rancher/bin
   entrypoint: /bin/true
   image: elasticsearch:2.2.1
@@ -20,6 +20,7 @@ elasticsearch-base-master:
   labels:
     elasticsearch.master.config.version: '0'
     io.rancher.container.hostname_override: container_name
+    io.rancher.scheduler.affinity:host_label: net.dst=true
   image: elasticsearch:2.2.1
   net: "container:elasticsearch-masters"
   volumes_from:
@@ -43,9 +44,10 @@ elasticsearch-datavolume-datanode:
     elasticsearch.datanode.config.version: '0'
     io.rancher.container.hostname_override: container_name
     io.rancher.container.start_once: true
+    io.rancher.scheduler.affinity:host_label: net.dst=true
   volumes:
-    - /usr/share/elasticsearch/data
-    - /usr/share/elasticsearch/config
+    - /usr/share/elasticsearch/data:/data/elasticsearch2/datanode/data
+    - /usr/share/elasticsearch/config:/data/elasticsearch2/datanode/config
     - /opt/rancher/bin
   entrypoint: /bin/true
   image: elasticsearch:2.2.1
@@ -78,8 +80,8 @@ elasticsearch-datavolume-clients:
     io.rancher.container.hostname_override: container_name
     io.rancher.container.start_once: true
   volumes:
-    - /usr/share/elasticsearch/data
-    - /usr/share/elasticsearch/config
+    - /usr/share/elasticsearch/data:/data/elasticsearch2/client/data
+    - /usr/share/elasticsearch/config:/data/elasticsearch2/client/config
     - /opt/rancher/bin
   entrypoint: /bin/true
   image: elasticsearch:2.2.1
