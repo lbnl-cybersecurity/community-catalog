@@ -58,6 +58,8 @@ elasticsearch-base-datanode:
   image: elasticsearch:2.2.1
   links:
     - elasticsearch-masters:es-masters
+  environment:
+    - ES_HEAP_SIZE=10g
   entrypoint:
     - /opt/rancher/bin/run.sh
   volumes_from:
